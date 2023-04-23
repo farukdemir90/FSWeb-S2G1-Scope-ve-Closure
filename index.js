@@ -30,10 +30,13 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  
+   skor1'de skor local scope, skor2'de skor global scope. 
+
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
+  skor1. skor1'e dışardan müdahale edilemiyor. 
   
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+  sadece fonksiyonun içinde kullanılacaksa skor1, skor globalse, skor2.
 */
 
 // skor1 kodları
@@ -64,12 +67,9 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru() {
+  return Math.floor(Math.random() * 16) + 10; // 10-25 arasında bir rastgele sayı üretir
 }
-
-
-
 
 /* Görev 3: macSonucu() 
 Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
@@ -86,9 +86,20 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(takimSkoruCallBack,ceyrekSayisi){
+let evSahibiSkor=0;
+let konukTakimSkor=0;
+for (let i=0; i<ceyrekSayisi; i++){
+  evSahibiSkor+=takimSkoruCallBack();
+  konukTakimSkor+=takimSkoruCallBack();
 }
+return {
+  EvSahibi: evSahibiSkor,
+  KonukTakim: konukTakimSkor
+}
+
+}
+
 
 
 
@@ -109,9 +120,13 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(takimSkoruCallBack) {
+  
+  return {
+    EvSahibi: takimSkoruCallBack(),
+  KonukTakim: takimSkoruCallBack()
 
+  }
 }
 
 
